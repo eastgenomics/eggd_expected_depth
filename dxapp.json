@@ -1,0 +1,76 @@
+{
+  "name": "dnanexus_expected_depth",
+  "title": "Expected depth per gene for a run",
+  "summary": "Calculates the expected depth per gene for a whole run.",
+  "dxapi": "1.0.0",
+  "version": "0.0.1",
+  "inputSpec": [
+    {
+      "name": "flagstat",
+      "label": "flagstat_files",
+      "class": "array:file",
+      "optional": false,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "coverage_files",
+      "label": "coverage files",
+      "class": "array:file",
+      "optional": false,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "coverage_index",
+      "label": "coverage tbi files",
+      "class": "array:file",
+      "optional": false,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    }
+  ],
+  "outputSpec": [
+    {
+      "name": "outfile",
+      "label": "outfile",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    }
+  ],
+  "runSpec": {
+    "timeoutPolicy": {
+      "*": {
+        "hours": 2
+      }
+    },
+    "interpreter": "bash",
+    "release": "16.04",
+    "distribution": "Ubuntu",
+    "file": "src/dnanexus_expected_depth.sh"
+  },
+  "access": {
+    "project": "CONTRIBUTE",
+    "network": [
+      "*"
+    ]
+  },
+  "regionalOptions": {
+    "aws:us-east-1": {
+      "systemRequirements": {
+        "*": {
+          "instanceType": "mem1_ssd1_x2"
+        }
+      }
+    }
+  }
+}
