@@ -18,8 +18,14 @@
 main() {
 
     echo "Value of flagstat: '${flagstat[@]}'"
-    echo "Value of coverage_files: '${coverage_files[@]}'"
+    echo "Value of coverage_files: '${coverage[@]}'"
     echo "Value of coverage_index: '${coverage_index[@]}'"
+
+    echo "installing dependencies"
+
+    pip install --upgrade pip
+    pip install pysam==0.7.6
+
 
     # The following line(s) use the dx command-line tool to download your file
     # inputs to the local file system using variable names for the filenames. To
@@ -28,21 +34,26 @@ main() {
 
     for i in ${!flagstat[@]}
     do
-        dx download "${flagstat[$i]}" -o flagstat-$i
+        dx download "${flagstat[$i]}" 
     done
 
-    for i in ${!coverage_files[@]}
+    for i in ${!coverage[@]}
     do
-        dx download "${coverage_files[$i]}" -o coverage_files-$i
+        dx download "${coverage[$i]}" 
     done
 
     for i in ${!coverage_index[@]}
     do
-        dx download "${coverage_index[$i]}" -o coverage_index-$i
+        dx download "${coverage_index[$i]}" 
     done
 
     # Fill in your application code here.
-    #
+    ls
+    project_name=$(dx describe project-Fjj60Qj4yBGvQXbb5Z6FXkgF --json | jq '.name' | sed 's/"//g')
+
+    expected_depth_for_run.py --depths *5bp.gz --flagstats *flagstat -o $project_name.refseq_nirvana_5bp
+
+
     # To report any recognized errors in the correct format in
     # $HOME/job_error.json and exit this script, you can use the
     # dx-jobutil-report-error utility as follows:
@@ -61,7 +72,8 @@ main() {
     # but you can change that behavior to suit your needs.  Run "dx upload -h"
     # to see more options to set metadata.
 
-    outfile=$(dx upload outfile --brief)
+    outfile=$(dx upload $project_name.refseq_nirvana_5bp.gz --brief)
+    outfile_index=$(dx upload $project_name.refseq_nirvana_5bp.gz.tbi --brief)
 
     # The following line(s) use the utility dx-jobutil-add-output to format and
     # add output variables to your job's output as appropriate for the output
@@ -69,4 +81,6 @@ main() {
     # does.
 
     dx-jobutil-add-output outfile "$outfile" --class=file
+    dx-jobutil-add-output outfile_index "$outfile_index" --class=file
+
 }
