@@ -47,12 +47,21 @@
         "*"
       ],
       "help": ""
+    },
+    {
+      "name": "outfile_index",
+      "label": "tbi_index",
+      "class": "file",
+      "patterns": [
+        "*.tbi"
+      ],
+      "help": ""
     }
   ],
   "runSpec": {
     "timeoutPolicy": {
       "*": {
-        "hours": 2
+        "hours": 1
       }
     },
     "interpreter": "bash",

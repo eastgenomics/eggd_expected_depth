@@ -48,7 +48,7 @@ main() {
     done
 
     # Fill in your application code here.
-    ls
+    
     project_name=$(dx describe project-Fjj60Qj4yBGvQXbb5Z6FXkgF --json | jq '.name' | sed 's/"//g')
 
     expected_depth_for_run.py --depths *5bp.gz --flagstats *flagstat -o $project_name.refseq_nirvana_5bp
