@@ -22,7 +22,6 @@ main() {
     echo "Value of coverage_index: '${coverage_index[@]}'"
 
     echo "installing dependencies"
-
     pip install --upgrade pip
     pip install pysam==0.7.6
 
@@ -32,6 +31,8 @@ main() {
     # recover the original filenames, you can use the output of "dx describe
     # "$variable" --name".
 
+    # Download all flagstat, nirvana_coverage (and index) files
+    echo "downloading files"
     for i in ${!flagstat[@]}
     do
         dx download "${flagstat[$i]}" 
@@ -47,10 +48,11 @@ main() {
         dx download "${coverage_index[$i]}" 
     done
 
-    # Fill in your application code here.
-    
+    # Get project name as prefix to the output files
     project_name=$(dx describe project-Fjj60Qj4yBGvQXbb5Z6FXkgF --json | jq '.name' | sed 's/"//g')
 
+    # Run expected_depth script.
+    echo "Running analysis"
     expected_depth_for_run.py --depths *5bp.gz --flagstats *flagstat -o $project_name.refseq_nirvana_5bp
 
 
@@ -71,7 +73,7 @@ main() {
     # that you have used the output field name for the filename for each output,
     # but you can change that behavior to suit your needs.  Run "dx upload -h"
     # to see more options to set metadata.
-
+    echo "uploading output files"
     outfile=$(dx upload $project_name.refseq_nirvana_5bp.gz --brief)
     outfile_index=$(dx upload $project_name.refseq_nirvana_5bp.gz.tbi --brief)
 
@@ -83,4 +85,5 @@ main() {
     dx-jobutil-add-output outfile "$outfile" --class=file
     dx-jobutil-add-output outfile_index "$outfile_index" --class=file
 
+    echo "Done!"
 }
