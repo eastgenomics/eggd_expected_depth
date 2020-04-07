@@ -1,9 +1,12 @@
 {
-  "name": "dnanexus_expected_depth",
-  "title": "Expected depth per gene for a run",
+  "name": "expected_depth_v1.0.0",
+  "title": "expected_depth_v1.0.0",
   "summary": "Calculates the expected depth per gene for a whole run.",
+  "tags":["Coverage"],
   "dxapi": "1.0.0",
-  "version": "0.0.1",
+  "properties": {
+    "githubRelease":"v1.0.0"
+  },
   "inputSpec": [
     {
       "name": "flagstat",
@@ -11,17 +14,17 @@
       "class": "array:file",
       "optional": false,
       "patterns": [
-        "*"
+        "*.flagstat"
       ],
       "help": ""
     },
     {
-      "name": "coverage_files",
+      "name": "coverage",
       "label": "coverage files",
       "class": "array:file",
       "optional": false,
       "patterns": [
-        "*"
+        "*.gz"
       ],
       "help": ""
     },
@@ -31,7 +34,7 @@
       "class": "array:file",
       "optional": false,
       "patterns": [
-        "*"
+        "*.tbi"
       ],
       "help": ""
     }
@@ -45,12 +48,21 @@
         "*"
       ],
       "help": ""
+    },
+    {
+      "name": "outfile_index",
+      "label": "tbi_index",
+      "class": "file",
+      "patterns": [
+        "*.tbi"
+      ],
+      "help": ""
     }
   ],
   "runSpec": {
     "timeoutPolicy": {
       "*": {
-        "hours": 2
+        "hours": 1
       }
     },
     "interpreter": "bash",
@@ -60,12 +72,13 @@
   },
   "access": {
     "project": "CONTRIBUTE",
+    "allProjects": "VIEW",
     "network": [
       "*"
     ]
   },
   "regionalOptions": {
-    "aws:us-east-1": {
+    "aws:eu-central-1": {
       "systemRequirements": {
         "*": {
           "instanceType": "mem1_ssd1_x2"
