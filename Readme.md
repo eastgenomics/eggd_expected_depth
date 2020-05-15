@@ -2,13 +2,14 @@
 # expected_depth (DNAnexus Platform App)
 
 ## What does this app do?
-Calculates the expected depth per gene for a whole sequencing run.
+Calculates the expected read depth per region.
 
 ## What are typical use cases for this app?
 This app should be executed as part of a DNAnexus workflow for multiple samples.
 
 ## What data are required for this app to run?
 This app requires all the region coverage files with their indexes and all the flagstat files for the whole run.
+All region coverage files must contain the same set of regions
 
 ## What does this app output?
 It outputs one file with the expected depth for each genomic region covered by the capture. The header contains the script name and all the samples used to calculate this. The rest of the file includes the genomic region (chrom, start, end), expected depth for that region and standard deviation. 
@@ -30,6 +31,8 @@ i.e.
 | 1       986633  986749  596.584166667   62.8941426015 | 
 | 1       986833  987025  345.305555556   44.4336752246 | 
 | 1       987108  987195  408.429722222   50.7999240993 | 
+
+Output is normalised to represent a sample containing 100M usable reads
 
 This is the source code for an app that runs on the DNAnexus Platform.
 For more information about how to run or modify it, see
