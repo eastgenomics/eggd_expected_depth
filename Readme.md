@@ -2,7 +2,7 @@
 # expected_depth (DNAnexus Platform App)
 
 ## What does this app do?
-Calculates the expected read depth per region.
+Calculates the expected read depth per region per sample for a sequencing run.
 
 ## What are typical use cases for this app?
 This app should be executed as part of a DNAnexus workflow for multiple samples.
