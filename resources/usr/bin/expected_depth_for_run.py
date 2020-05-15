@@ -145,9 +145,9 @@ def standard_deviation(values):
 
     """
 
-    if len(values) = 1:
+    if len(values) == 1:
         return 0
-        
+
     sqr_sum = 0.0
 
     for value in values:
