@@ -1,11 +1,11 @@
 {
-  "name": "expected_depth_v1.0.0",
-  "title": "expected_depth_v1.0.0",
+  "name": "expected_depth_v1.1.1",
+  "title": "expected_depth_v1.1.1",
   "summary": "Calculates the expected depth per gene for a whole run.",
   "tags":["Coverage"],
   "dxapi": "1.0.0",
   "properties": {
-    "githubRelease":"v1.0.0"
+    "githubRelease":"v1.1.1"
   },
   "inputSpec": [
     {
