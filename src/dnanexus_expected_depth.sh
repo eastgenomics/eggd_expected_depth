@@ -49,7 +49,7 @@ main() {
     done
 
     # Get project name as prefix to the output files
-    project_name=$(dx describe project-Fjj60Qj4yBGvQXbb5Z6FXkgF --json | jq '.name' | sed 's/"//g')
+    project_name=$(dx describe $DX_PROJECT_CONTEXT_ID --json | jq '.name' | sed 's/"//g')
 
     # Run expected_depth script.
     echo "Running analysis"
