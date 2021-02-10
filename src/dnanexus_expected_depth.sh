@@ -22,8 +22,8 @@ main() {
     echo "Value of coverage_index: '${coverage_index[@]}'"
 
     echo "installing dependencies"
-    pip install --upgrade pip
-    pip install pysam==0.7.6
+    pip install pip-20.3.3.tar.gz
+    pip install pysam-0.7.6.tar.gz
 
 
     # The following line(s) use the dx command-line tool to download your file
@@ -54,19 +54,6 @@ main() {
     # Run expected_depth script.
     echo "Running analysis"
     expected_depth_for_run.py --depths *5bp.gz --flagstats *flagstat -o $project_name.refseq_nirvana_5bp
-
-
-    # To report any recognized errors in the correct format in
-    # $HOME/job_error.json and exit this script, you can use the
-    # dx-jobutil-report-error utility as follows:
-    #
-    #   dx-jobutil-report-error "My error message"
-    #
-    # Note however that this entire bash script is executed with -e
-    # when running in the cloud, so any line which returns a nonzero
-    # exit code will prematurely exit the script; if no error was
-    # reported in the job_error.json file, then the failure reason
-    # will be AppInternalError with a generic error message.
 
     # The following line(s) use the dx command-line tool to upload your file
     # outputs after you have created them on the local file system.  It assumes
